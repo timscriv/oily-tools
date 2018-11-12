@@ -1,0 +1,68 @@
+{
+  "type": "System Context",
+  "scope": "Oily Tools",
+  "description": "The system context diagram for My Oil Tools.",
+  "size": "A6_Portrait",
+
+
+  "elements": [
+    {
+      "type": "Person",
+      "name": "Oily Person",
+      "description": "A person that uses Oil Tools to keeps track of their oil life.",
+      "tags": "",
+      "position": "420,353"
+    },
+    {
+      "type": "Software System",
+      "name": "Oily Tools",
+      "description": "Oil Tools gives a place to manage Essential oils, blends, recipes, and inventory.",
+      "tags": "",
+      "position": "395,1003"
+    }
+  ],
+
+
+  "relationships": [
+    {
+      "source": "Oily Person",
+      "description": "Uses",
+      "technology": "",
+      "destination": "Oily Tools",
+      "tags": "",
+      "vertices": []
+    }
+  ],
+
+
+  "styles": [
+    {
+      "type": "element",
+      "description": "",
+      "tag": "Person",
+      "width": "",
+      "height": "",
+      "background": "#08427b",
+      "color": "#ffffff",
+      "fontSize": "",
+      "border": "",
+      "opacity": "",
+      "shape": "Person",
+      "metadata": ""
+    },
+    {
+      "type": "element",
+      "description": "",
+      "tag": "Software System",
+      "width": "",
+      "height": "",
+      "background": "#1168bd",
+      "color": "#ffffff",
+      "fontSize": "",
+      "border": "",
+      "opacity": "",
+      "shape": "",
+      "metadata": ""
+    }
+  ]
+}
