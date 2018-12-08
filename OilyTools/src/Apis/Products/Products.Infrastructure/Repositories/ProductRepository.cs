@@ -16,13 +16,11 @@ namespace Products.Infrastructure.Repositories
             _context = context;
         }
 
-        public Product Create(Product product)
+        public void Create(Product product)
         {
             _context.Products.Add(product);
 
             _context.SaveChanges();
-
-            return _context.Products.Find(product.Id);
         }
 
         public void Delete(Product product)
@@ -44,14 +42,16 @@ namespace Products.Infrastructure.Repositories
                 .ToList();
         }
 
-        public Product Update(Product product)
+        public void Update(Product product)
         {
             _context.Entry(product).State = EntityState.Modified;
 
             _context.SaveChanges();
-
-            return _context.Products.Find(product.Id);
         }
 
+        public Product GetByName(string name)
+        {
+            return _context.Products.SingleOrDefault(p => p.Name == name);
+        }
     }
 }

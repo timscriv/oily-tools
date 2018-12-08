@@ -16,14 +16,12 @@ namespace Products.Core.UseCases.Products
             _productRepository = productRepository;
         }
 
-        public Product Execute(Product request)
+        public CreateProductUseCaseResponse Execute(Product request)
         {
             request.Events.Add(new ProductCreatedEvent(request));
-            var product = _productRepository.Create(request);
+            _productRepository.Create(request);
 
-            var equal = product == request;
-
-            return product;
+            return new CreateProductUseCaseResponse(request.Id);
         }
     }
 }

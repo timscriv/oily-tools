@@ -3,6 +3,7 @@ using Products.Api.Dtos;
 using Products.Core.Converters;
 using Products.Core.Entities;
 using Products.Core.Interfaces.UseCases.Products;
+using Products.Core.UseCases.Products;
 using Products.Infrastructure.Contexts;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,13 +38,23 @@ namespace Products.Api.Controllers
         public ActionResult<List<ProductDto>> Get()
         {
             var response = _getProductsUseCase.Execute();
+
             return _converter.Convert(response).ToList();
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<ProductDto> Get(int id)
+        [HttpGet("{id:int}")]
+        public ActionResult<ProductDto> GetById(int id)
         {
-            var response = _getProductUseCase.Execute(id);
+            var response = _getProductUseCase.Execute(GetProductUseCaseRequest.ById(id));
+
+            return _converter.Convert(response);
+        }
+
+        [HttpGet("{name:alpha}")]
+        public ActionResult<ProductDto> GetByName(string name)
+        {
+            var response = _getProductUseCase.Execute(GetProductUseCaseRequest.ByName(name));
+
             return _converter.Convert(response);
         }
 
@@ -52,9 +63,9 @@ namespace Products.Api.Controllers
         {
             var product = _converter.Convert(productDto);
 
-            var newProduct = _createProductUseCase.Execute(product);
+            var response = _createProductUseCase.Execute(product);
 
-            return _converter.Convert(newProduct);
+            return CreatedAtAction(nameof(GetById), new { id = response.Id }, product);
         }
 
         //[HttpPut("{id}")]

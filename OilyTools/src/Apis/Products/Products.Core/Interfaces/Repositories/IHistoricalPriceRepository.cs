@@ -1,10 +1,9 @@
+using OilyTools.Core.Interfaces.Repositories;
 using Products.Core.Entities;
 
 namespace Products.Core.Interfaces.Repositories
 {
-    public interface IHistoricalPriceRepository
+    public interface IHistoricalPriceRepository : IBaseRepository<int, HistoricalPrice>
     {
-        HistoricalPrice Add(HistoricalPrice historicalPrice);
-        void Save();
     }
 }

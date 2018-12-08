@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Products.Core.Entities;
 using Products.Core.Interfaces.Repositories;
 using Products.Infrastructure.Contexts;
@@ -12,16 +13,29 @@ namespace Products.Infrastructure.Repositories
             _context = context;
         }
 
-        public HistoricalPrice Add(HistoricalPrice historicalPrice)
+        public void Create(HistoricalPrice product)
         {
-           _context.HistoricalPrices.Add(historicalPrice);
-
-           return historicalPrice;
+            throw new System.NotImplementedException();
         }
 
-        public void Save()
+        public void Delete(HistoricalPrice product)
         {
-            _context.SaveChanges();
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<HistoricalPrice> GetAll()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public HistoricalPrice GetById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Update(HistoricalPrice product)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

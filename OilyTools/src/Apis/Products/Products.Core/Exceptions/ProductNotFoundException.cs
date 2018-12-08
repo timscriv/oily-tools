@@ -7,6 +7,10 @@ namespace Products.Core.Exceptions
 {
     public class ProductNotFoundException: NotFoundException
     {
+        public ProductNotFoundException(string name) : base("Product", name)
+        {
+        }
+
         public ProductNotFoundException(int id) : base("Product", id)
         {
         }

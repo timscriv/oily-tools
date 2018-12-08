@@ -1,4 +1,6 @@
-﻿using Products.Core.Entities;
+﻿using System;
+using OilyTools.Core.Exceptions;
+using Products.Core.Entities;
 using Products.Core.Exceptions;
 using Products.Core.Interfaces.Repositories;
 using Products.Core.Interfaces.UseCases.Products;
@@ -14,12 +16,41 @@ namespace Products.Core.UseCases.Products
             _productRepository = productRepository;
         }
 
-        public Product Execute(int request)
+        public Product Execute(GetProductUseCaseRequest request)
         {
-            var product = _productRepository.GetById(request);
+            if (request.Id.HasValue ^ string.IsNullOrEmpty(request.Name))
+                throw new DomainException("Request must have either ID or name.");
+
+            Product product;
+
+            if (request.Id.HasValue)
+            {
+                product = GetById(request.Id.Value);
+            }
+            else
+            {
+                product = GetByName(request.Name);
+            }
+
+            return product;
+        }
+
+        private Product GetByName(string name)
+        {
+            var product = _productRepository.GetByName(name);
 
             if (product == null)
-                throw new ProductNotFoundException(request);
+                throw new ProductNotFoundException(name);
+
+            return product;
+        }
+
+        private Product GetById(int id)
+        {
+            var product = _productRepository.GetById(id);
+
+            if (product == null)
+                throw new ProductNotFoundException(id);
 
             return product;
         }
