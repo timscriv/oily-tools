@@ -1,8 +1,8 @@
 ## Infrastructure Layer
 
-This layer contains classes for accessing external resources such as databases, file systems, web services, and so on. These classes should be based on interfaces defined within the application (core) layer.
+This layer contains classes for accessing external resources such as databases, file systems, web services, and so on. Should contain the DbContexts, migrations, and repositories for accessing the external resources. These classes should be based on interfaces defined within the application (core) layer.
 
-## Dependencies
+## Dependencies within solution
 
 This layer should only be dependent on the Core project of the Api.
 
@@ -12,13 +12,8 @@ This layer should only be dependent on the Core project of the Api.
 +---------+----------+
           |
           v
-     +----------+
+     +----+-----+
      |{api}.Core|
      +----+-----+
-          |
-		  v
-     +----------+
-     |{sln}.Core|
-     +----------+
 
 ```

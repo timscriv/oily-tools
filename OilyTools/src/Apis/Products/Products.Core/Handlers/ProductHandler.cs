@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using OilyTools.Core.Interfaces;
 using Products.Core.DomainEvents;
-using Products.Core.Entities;
-using Products.Core.Repositories;
+using Products.Core.Interfaces.Repositories;
 
 namespace Products.Core.Handlers
 {

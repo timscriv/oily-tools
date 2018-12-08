@@ -43,6 +43,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Products.Core", "src\Apis\P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Products.Infrastructure", "src\Apis\Products\Products.Infrastructure\Products.Infrastructure.csproj", "{AB80771A-7B6A-4E38-9D23-1C7950D6E1DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OilyTools.Core", "src\OilyTools.Core\OilyTools.Core.csproj", "{829126AB-8FEF-4EE1-BF80-1EE867F78DED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{AB80771A-7B6A-4E38-9D23-1C7950D6E1DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB80771A-7B6A-4E38-9D23-1C7950D6E1DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB80771A-7B6A-4E38-9D23-1C7950D6E1DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{829126AB-8FEF-4EE1-BF80-1EE867F78DED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{829126AB-8FEF-4EE1-BF80-1EE867F78DED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{829126AB-8FEF-4EE1-BF80-1EE867F78DED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{829126AB-8FEF-4EE1-BF80-1EE867F78DED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +77,7 @@ Global
 		{C779A58D-D24A-443E-9A11-F357270A4E11} = {D14EBB9E-A4EE-416E-BD7E-FF7AF48DD559}
 		{103061D1-3C8F-4026-A445-E8BE044AE0AE} = {D14EBB9E-A4EE-416E-BD7E-FF7AF48DD559}
 		{AB80771A-7B6A-4E38-9D23-1C7950D6E1DA} = {D14EBB9E-A4EE-416E-BD7E-FF7AF48DD559}
+		{829126AB-8FEF-4EE1-BF80-1EE867F78DED} = {156E57EA-6CE0-45C1-BF67-97401E1D2F1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E9A2091-1B2C-47BC-9D6A-C528160F88EA}

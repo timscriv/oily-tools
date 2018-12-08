@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OilyTools.Core.Interfaces.DomainEvents.Dispatchers;
 using Products.Core.Contexts.Configurations;
-using Products.Core.DomainEvents.Dispatchers;
 using Products.Core.Entities;
 using System.Linq;
 

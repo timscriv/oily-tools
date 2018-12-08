@@ -1,4 +1,6 @@
-﻿namespace Products.Core.DomainEvents
+﻿using OilyTools.Core.DomainEvents;
+
+namespace Products.Core.DomainEvents
 {
     public class ProductPriceChangedEvent: BaseDomainEvent
     {

@@ -5,13 +5,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using OilyTools.Core.DomainEvents.Dispatchers;
+using OilyTools.Core.Interfaces;
+using OilyTools.Core.Interfaces.DomainEvents.Dispatchers;
+using Products.Api.Dtos;
 using Products.Api.Filters;
 using Products.Core.Converters;
 using Products.Core.DomainEvents;
-using Products.Core.DomainEvents.Dispatchers;
+using Products.Core.Entities;
 using Products.Core.Handlers;
-using Products.Core.Repositories;
-using Products.Core.Services;
+using Products.Core.Interfaces.Repositories;
+using Products.Core.Interfaces.UseCases.Products;
+using Products.Core.UseCases.Products;
 using Products.Infrastructure.Contexts;
 using Products.Infrastructure.Repositories;
 using Swashbuckle.AspNetCore.Swagger;
@@ -37,7 +42,7 @@ namespace Products.Api
             }).AddJsonOptions(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<ProductsContext>(options => options.UseSqlite("Data Source=../../../../oilytools.db"));
 
@@ -47,11 +52,13 @@ namespace Products.Api
             });
 
             services
-                .AddScoped<IProductService, ProductService>()
+                .AddScoped<IGetProductsUseCase, GetProductsUseCase>()
+                .AddScoped<IGetProductUseCase, GetProductUseCase>()
+                .AddScoped<ICreateProductUseCase, CreateProductUseCase>()
                 .AddScoped<IProductRepository, ProductRepository>()
                 .AddScoped<IHistoricalPriceRepository, HistoricalPriceRepository>()
                 .AddScoped<IDomainEventDispatcher, DomainEventDispatcher>()
-                .AddScoped<ProductConverter>()
+                .AddScoped<IConverter<Product, ProductDto>, ProductConverter>()
                 .AddScoped(typeof(IHandle<ProductCreatedEvent>), typeof(ProductHandler))
                 .AddScoped(typeof(IHandle<ProductPriceChangedEvent>), typeof(ProductHandler))
                 .AddSwaggerGen(c => c.SwaggerDoc("v1", new Info { Title = "Oily Tools API", Version = "v1" }));

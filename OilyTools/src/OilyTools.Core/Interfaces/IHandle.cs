@@ -1,6 +1,6 @@
-﻿using Products.Core.DomainEvents;
+﻿using OilyTools.Core.DomainEvents;
 
-namespace Products.Core.Handlers
+namespace OilyTools.Core.Interfaces
 {
     public interface IHandle<T> where T: BaseDomainEvent
     {

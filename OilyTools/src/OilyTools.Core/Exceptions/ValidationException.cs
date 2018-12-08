@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Products.Core.Exceptions
+namespace OilyTools.Core.Exceptions
 {
     public class ValidationException: DomainException
     {

@@ -1,6 +1,5 @@
-﻿using Products.Core.Dtos;
+﻿using Products.Api.Dtos;
 using Products.Core.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,36 +7,40 @@ namespace Products.Core.Converters
 {
     public class ProductConverter : IConverter<Product, ProductDto>
     {
-        public ProductDto ConvertToDto(Product entity)
+        public ProductDto Convert(Product entity)
         {
             if (entity == null) return null;
 
             return new ProductDto
             {
+                Id = entity.Id,
                 Name = entity.Name,
                 Price = entity.CurrentPrice
             };
         }
 
-        public IEnumerable<ProductDto> ConvertToDtos(IEnumerable<Product> entities)
-        {
-            return entities?.Select(e => ConvertToDto(e));
-        }
-
-        public IEnumerable<Product> ConvertToEntities(IEnumerable<ProductDto> dtos)
-        {
-            return dtos?.Select(d => ConvertToEntity(d));
-        }
-
-        public Product ConvertToEntity(ProductDto dto)
+        public Product Convert(ProductDto dto)
         {
             if (dto == null) return null;
 
             return new Product
             {
+                Id = dto.Id,
                 Name = dto.Name,
                 CurrentPrice = dto.Price
             };
         }
+
+        public IEnumerable<ProductDto> Convert(IEnumerable<Product> entities)
+        {
+            return entities?.Select(e => Convert(e));
+        }
+
+        public IEnumerable<Product> Convert(IEnumerable<ProductDto> dtos)
+        {
+            return dtos?.Select(d => Convert(d));
+        }
+
+       
     }
 }

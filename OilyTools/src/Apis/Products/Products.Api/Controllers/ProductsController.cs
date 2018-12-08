@@ -1,15 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Products.Api.Dtos;
 using Products.Core.Converters;
-using Products.Core.Dtos;
 using Products.Core.Entities;
-using Products.Core.DomainEvents;
-using Products.Core.Exceptions;
-using System;
+using Products.Core.Interfaces.UseCases.Products;
+using Products.Infrastructure.Contexts;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Products.Core.Services;
-using Products.Infrastructure.Contexts;
 
 namespace Products.Api.Controllers
 {
@@ -18,49 +14,66 @@ namespace Products.Api.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly ProductsContext _context;
-        private readonly IProductService _productService;
+        private readonly IGetProductsUseCase _getProductsUseCase;
+        private readonly IGetProductUseCase _getProductUseCase;
+        private readonly ICreateProductUseCase _createProductUseCase;
+        private readonly IConverter<Product, ProductDto> _converter;
 
-        public ProductsController(ProductsContext context, IProductService productService)
+        public ProductsController(
+            ProductsContext context,
+            IGetProductsUseCase getProductsUseCase,
+            IGetProductUseCase getProductUseCase,
+            ICreateProductUseCase createProductUseCase,
+            IConverter<Product, ProductDto> converter)
         {
             _context = context;
-            _productService = productService;
+            _getProductsUseCase = getProductsUseCase;
+            _getProductUseCase = getProductUseCase;
+            _createProductUseCase = createProductUseCase;
+            _converter = converter;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ProductDto>> Get()
+        public ActionResult<List<ProductDto>> Get()
         {
-            return _productService.GetProducts();
+            var response = _getProductsUseCase.Execute();
+            return _converter.Convert(response).ToList();
         }
 
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<ProductDto> Get(int id)
         {
-            throw new NotFoundException("value", id);
+            var response = _getProductUseCase.Execute(id);
+            return _converter.Convert(response);
         }
 
         [HttpPost]
         public ActionResult<ProductDto> Post([FromBody] ProductDto productDto)
         {
-            return _productService.AddProduct(productDto);
+            var product = _converter.Convert(productDto);
+
+            var newProduct = _createProductUseCase.Execute(product);
+
+            return _converter.Convert(newProduct);
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] ProductDto productDto)
-        {
-            var product = _context.Products.FirstOrDefault();
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] ProductDto productDto)
+        //{
+        //    var product = _context.Products.FirstOrDefault();
 
-            if (product.CurrentPrice != productDto.Price)
-                product.Events.Add(new ProductPriceChangedEvent(product.Id, productDto.Price));
+        //    if (product.CurrentPrice != productDto.Price)
+        //        product.Events.Add(new ProductPriceChangedEvent(product.Id, productDto.Price));
 
-            product.CurrentPrice = productDto.Price;
-            product.Name = productDto.Name;
+        //    product.CurrentPrice = productDto.Price;
+        //    product.Name = productDto.Name;
 
-            _context.SaveChanges();
-        }
+        //    _context.SaveChanges();
+        //}
 
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

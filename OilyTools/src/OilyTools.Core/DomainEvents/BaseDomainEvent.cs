@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Products.Core.DomainEvents
+namespace OilyTools.Core.DomainEvents
 {
     public abstract class BaseDomainEvent
     {

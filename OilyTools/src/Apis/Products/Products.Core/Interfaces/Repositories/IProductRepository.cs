@@ -1,15 +1,14 @@
 ﻿using Products.Core.Entities;
 using System.Collections.Generic;
 
-namespace Products.Core.Repositories
+namespace Products.Core.Interfaces.Repositories
 {
     public interface IProductRepository
     {
         Product GetById(int id);
-        List<Product> GetAll();
-        Product Add(Product product);
-        void Update(Product product);
+        IEnumerable<Product> GetAll();
+        Product Create(Product product);
+        Product Update(Product product);
         void Delete(Product product);
-        void Save();
     }
 }

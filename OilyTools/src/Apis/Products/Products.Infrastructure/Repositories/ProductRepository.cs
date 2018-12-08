@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Products.Core.Entities;
-using Products.Core.Repositories;
+using Products.Core.Interfaces.Repositories;
 using Products.Infrastructure.Contexts;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,36 +16,42 @@ namespace Products.Infrastructure.Repositories
             _context = context;
         }
 
-        public Product Add(Product product)
+        public Product Create(Product product)
         {
             _context.Products.Add(product);
 
-            return product;
+            _context.SaveChanges();
+
+            return _context.Products.Find(product.Id);
         }
 
         public void Delete(Product product)
         {
             _context.Products.Remove(product);
+
+            _context.SaveChanges();
         }
 
         public Product GetById(int id)
         {
-            return _context.Products.SingleOrDefault(e => e.Id == id);
+            return _context.Products.Find(id);
         }
 
-        public List<Product> GetAll()
+        public IEnumerable<Product> GetAll()
         {
-            return _context.Products.ToList();
+            return _context
+                .Products
+                .ToList();
         }
 
-        public void Update(Product product)
+        public Product Update(Product product)
         {
             _context.Entry(product).State = EntityState.Modified;
+
+            _context.SaveChanges();
+
+            return _context.Products.Find(product.Id);
         }
 
-        public void Save()
-        {
-            _context.SaveChanges();
-        }
     }
 }

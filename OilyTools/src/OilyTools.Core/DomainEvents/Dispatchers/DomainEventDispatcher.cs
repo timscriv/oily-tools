@@ -1,11 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Products.Core.Handlers;
+using OilyTools.Core.Interfaces;
+using OilyTools.Core.Interfaces.DomainEvents.Dispatchers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Products.Core.DomainEvents.Dispatchers
+namespace OilyTools.Core.DomainEvents.Dispatchers
 {
     // https://gist.github.com/jbogard/54d6569e883f63afebc7
     // http://lostechies.com/jimmybogard/2014/05/13/a-better-domain-events-pattern/

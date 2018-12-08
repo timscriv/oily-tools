@@ -1,4 +1,5 @@
-﻿using Products.Core.Entities;
+﻿using OilyTools.Core.DomainEvents;
+using Products.Core.Entities;
 
 namespace Products.Core.DomainEvents
 {

@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Products.Core.Dtos
+namespace Products.Api.Dtos
 {
     public class ProductDto
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 

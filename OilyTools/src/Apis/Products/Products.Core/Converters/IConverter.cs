@@ -6,10 +6,10 @@ namespace Products.Core.Converters
 {
     public interface IConverter<TEntity, TDto>
     {
-        IEnumerable<TEntity> ConvertToEntities(IEnumerable<TDto> dtos);
-        TEntity ConvertToEntity(TDto dto);
+        TDto Convert(TEntity entity);
+        TEntity Convert(TDto dto);
 
-        IEnumerable<TDto> ConvertToDtos(IEnumerable<TEntity> entities);
-        TDto ConvertToDto(TEntity entity);
+        IEnumerable<TDto> Convert(IEnumerable<TEntity> entities);
+        IEnumerable<TEntity> Convert(IEnumerable<TDto> dtos);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Products.Core.Exceptions
+namespace OilyTools.Core.Exceptions
 {
     public class DomainException: Exception
     {

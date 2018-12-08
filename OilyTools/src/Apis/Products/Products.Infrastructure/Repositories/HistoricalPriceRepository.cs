@@ -1,5 +1,5 @@
 using Products.Core.Entities;
-using Products.Core.Repositories;
+using Products.Core.Interfaces.Repositories;
 using Products.Infrastructure.Contexts;
 
 namespace Products.Infrastructure.Repositories

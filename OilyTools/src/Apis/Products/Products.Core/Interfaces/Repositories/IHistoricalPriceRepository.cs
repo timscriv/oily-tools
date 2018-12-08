@@ -1,6 +1,6 @@
 using Products.Core.Entities;
 
-namespace Products.Core.Repositories
+namespace Products.Core.Interfaces.Repositories
 {
     public interface IHistoricalPriceRepository
     {

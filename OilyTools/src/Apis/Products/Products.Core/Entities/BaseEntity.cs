@@ -1,4 +1,4 @@
-﻿using Products.Core.DomainEvents;
+﻿using OilyTools.Core.DomainEvents;
 using System.Collections.Generic;
 
 namespace Products.Core.Entities
