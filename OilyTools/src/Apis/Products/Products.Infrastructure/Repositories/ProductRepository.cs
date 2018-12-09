@@ -4,6 +4,7 @@ using Products.Core.Interfaces.Repositories;
 using Products.Infrastructure.Contexts;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace Products.Infrastructure.Repositories
 {
@@ -37,6 +38,8 @@ namespace Products.Infrastructure.Repositories
 
         public IEnumerable<Product> GetAll()
         {
+            Thread.Sleep(1000); //Fake sleep to illustrate the caching benefits on bigger data
+
             return _context
                 .Products
                 .ToList();

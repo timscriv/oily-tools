@@ -7,10 +7,10 @@ namespace Products.Core.UseCases.Products
 {
     public class GetProductsUseCase : IGetProductsUseCase
     {
-        private readonly IProductRepository _productRepository;
+        private readonly IProductReadOnlyRepository _productRepository;
 
         public GetProductsUseCase(
-            IProductRepository productRepository)
+            IProductReadOnlyRepository productRepository)
         {
             _productRepository = productRepository;
         }

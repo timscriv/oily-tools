@@ -9,9 +9,9 @@ namespace Products.Core.UseCases.Products
 {
     public class GetProductUseCase : IGetProductUseCase
     {
-        private readonly IProductRepository _productRepository;
+        private readonly IProductReadOnlyRepository _productRepository;
 
-        public GetProductUseCase(IProductRepository productRepository)
+        public GetProductUseCase(IProductReadOnlyRepository productRepository)
         {
             _productRepository = productRepository;
         }

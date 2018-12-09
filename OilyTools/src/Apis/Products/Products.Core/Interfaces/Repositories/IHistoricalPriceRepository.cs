@@ -3,7 +3,7 @@ using Products.Core.Entities;
 
 namespace Products.Core.Interfaces.Repositories
 {
-    public interface IHistoricalPriceRepository : IBaseRepository<int, HistoricalPrice>
+    public interface IHistoricalPriceRepository : IBaseReadOnlyRepository<int, HistoricalPrice>
     {
     }
 }

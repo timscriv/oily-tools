@@ -55,6 +55,8 @@ namespace Products.Api
                 .AddScoped<IGetProductsUseCase, GetProductsUseCase>()
                 .AddScoped<IGetProductUseCase, GetProductUseCase>()
                 .AddScoped<ICreateProductUseCase, CreateProductUseCase>()
+                .AddScoped<IProductReadOnlyRepository, ProductCachedRepository>()
+                .AddScoped<ProductRepository>()
                 .AddScoped<IProductRepository, ProductRepository>()
                 .AddScoped<IHistoricalPriceRepository, HistoricalPriceRepository>()
                 .AddScoped<IDomainEventDispatcher, DomainEventDispatcher>()
