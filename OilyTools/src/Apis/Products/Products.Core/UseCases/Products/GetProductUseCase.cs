@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using OilyTools.Core.Exceptions;
 using Products.Core.Entities;
 using Products.Core.Exceptions;
@@ -9,15 +10,17 @@ namespace Products.Core.UseCases.Products
 {
     public class GetProductUseCase : IGetProductUseCase
     {
-        private readonly IProductReadOnlyRepository _productRepository;
+        private readonly IProductRepository _productRepository;
 
-        public GetProductUseCase(IProductReadOnlyRepository productRepository)
+        public GetProductUseCase(IProductRepository productRepository)
         {
             _productRepository = productRepository;
         }
 
         public Product Execute(GetProductUseCaseRequest request)
         {
+            Thread.Sleep(1000); //Fake delay to show caching benefits
+
             if (request.Id.HasValue ^ string.IsNullOrEmpty(request.Name))
                 throw new DomainException("Request must have either ID or name.");
 

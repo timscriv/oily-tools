@@ -9,7 +9,7 @@ namespace Products.Infrastructure.Repositories
     public class ProductCachedRepository : IProductReadOnlyRepository
     {
         private readonly ProductRepository _innerRepository;
-        private readonly MemoryCacheEntryOptions cacheOptions;
+        private readonly MemoryCacheEntryOptions _cacheOptions;
         private readonly IMemoryCache _cache;
         private const string CacheKey = "Products";
 
@@ -18,7 +18,7 @@ namespace Products.Infrastructure.Repositories
             _cache = cache;
             _innerRepository = innerRepository;
 
-            cacheOptions = new MemoryCacheEntryOptions()
+            _cacheOptions = new MemoryCacheEntryOptions()
                 .SetAbsoluteExpiration(TimeSpan.FromSeconds(5));
         }
 
@@ -26,7 +26,7 @@ namespace Products.Infrastructure.Repositories
         {
             return _cache.GetOrCreate(CacheKey, cacheEntry =>
             {
-                cacheEntry.SetOptions(cacheOptions);
+                cacheEntry.SetOptions(_cacheOptions);
                 return _innerRepository.GetAll();
             });
         }
@@ -35,7 +35,7 @@ namespace Products.Infrastructure.Repositories
         {
             return _cache.GetOrCreate($"{CacheKey}-{id}", cacheEntry =>
             {
-                cacheEntry.SetOptions(cacheOptions);
+                cacheEntry.SetOptions(_cacheOptions);
                 return _innerRepository.GetById(id);
             });
         }
@@ -44,7 +44,7 @@ namespace Products.Infrastructure.Repositories
         {
             return _cache.GetOrCreate($"{CacheKey}-{name}", cacheEntry =>
             {
-                cacheEntry.SetOptions(cacheOptions);
+                cacheEntry.SetOptions(_cacheOptions);
                 return _innerRepository.GetByName(name);
             });
         }

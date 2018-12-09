@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Products.Core.UseCases.Products
 {
-    public class GetProductUseCaseRequest : ValueObject
+    public class GetProductUseCaseRequest: ValueObject
     {
         public int? Id { get; private set; }
 

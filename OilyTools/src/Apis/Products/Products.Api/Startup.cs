@@ -53,7 +53,8 @@ namespace Products.Api
 
             services
                 .AddScoped<IGetProductsUseCase, GetProductsUseCase>()
-                .AddScoped<IGetProductUseCase, GetProductUseCase>()
+                .AddScoped<IGetProductUseCase, GetProductUseCaseCached>()
+                .AddScoped<GetProductUseCase>()
                 .AddScoped<ICreateProductUseCase, CreateProductUseCase>()
                 .AddScoped<IProductReadOnlyRepository, ProductCachedRepository>()
                 .AddScoped<ProductRepository>()
