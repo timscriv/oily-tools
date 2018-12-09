@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Products.Core.Converters
+namespace OilyTools.Core.Converters
 {
     public interface IConverter<TEntity, TDto>
     {

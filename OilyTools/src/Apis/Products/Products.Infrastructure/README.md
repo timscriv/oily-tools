@@ -14,6 +14,5 @@ This layer should only be dependent on the Core project of the Api.
           v
      +----+-----+
      |{api}.Core|
-     +----+-----+
-
+     +----------+
 ```
