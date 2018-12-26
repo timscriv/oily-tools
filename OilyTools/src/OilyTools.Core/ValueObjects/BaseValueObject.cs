@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OilyTools.Core
+namespace OilyTools.Core.ValueObjects
 {
     //https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/implement-value-objects#value-object-implementation-in-c
-    public abstract class ValueObject
+    public abstract class BaseValueObject
     {
-        protected static bool EqualOperator(ValueObject left, ValueObject right)
+        protected static bool EqualOperator(BaseValueObject left, BaseValueObject right)
         {
             if (left is null ^ right is null)
             {
@@ -17,7 +17,7 @@ namespace OilyTools.Core
             return left?.Equals(right) != false;
         }
 
-        protected static bool NotEqualOperator(ValueObject left, ValueObject right)
+        protected static bool NotEqualOperator(BaseValueObject left, BaseValueObject right)
         {
             return !EqualOperator(left, right);
         }
@@ -31,7 +31,7 @@ namespace OilyTools.Core
                 return false;
             }
 
-            ValueObject other = (ValueObject)obj;
+            BaseValueObject other = (BaseValueObject)obj;
             IEnumerator<object> thisValues = GetAtomicValues().GetEnumerator();
             IEnumerator<object> otherValues = other.GetAtomicValues().GetEnumerator();
             while (thisValues.MoveNext() && otherValues.MoveNext())

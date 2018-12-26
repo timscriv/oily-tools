@@ -1,9 +1,9 @@
-﻿using OilyTools.Core;
+﻿using OilyTools.Core.ValueObjects;
 using System.Collections.Generic;
 
 namespace Products.Core.UseCases.Products
 {
-    public class GetProductUseCaseRequest: ValueObject
+    public class GetProductUseCaseRequest: BaseValueObject
     {
         public int? Id { get; private set; }
 

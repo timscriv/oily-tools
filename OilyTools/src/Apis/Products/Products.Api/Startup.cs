@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using OilyTools.Core.Converters;
 using OilyTools.Core.DomainEvents.Dispatchers;
 using OilyTools.Core.Interfaces;
 using OilyTools.Core.Interfaces.DomainEvents.Dispatchers;
@@ -64,7 +65,7 @@ namespace Products.Api
                 .AddScoped<IConverter<Product, ProductDto>, ProductConverter>()
                 .AddScoped(typeof(IHandle<ProductCreatedEvent>), typeof(ProductHandler))
                 .AddScoped(typeof(IHandle<ProductPriceChangedEvent>), typeof(ProductHandler))
-                .AddSwaggerGen(c => c.SwaggerDoc("v1", new Info { Title = "Oily Tools API", Version = "v1" }));
+                .AddSwaggerGen(c => c.SwaggerDoc("v1", new Info { Title = "Products API", Version = "v1" }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,7 +83,7 @@ namespace Products.Api
             app
                 .UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin())
                 .UseSwagger()
-                .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Oily Tools API V1"))
+                .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Products API V1"))
                 .UseHttpsRedirection()
                 .UseMvc();
         }

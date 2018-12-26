@@ -1,4 +1,6 @@
-using System.Collections.Generic;
+using OilyTools.Core.Interfaces;
+using OilyTools.Core.Interfaces.Specifications;
+using Paginator;
 using Products.Core.Entities;
 using Products.Core.Interfaces.Repositories;
 using Products.Infrastructure.Contexts;
@@ -23,7 +25,7 @@ namespace Products.Infrastructure.Repositories
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<HistoricalPrice> GetAll()
+        public IPagingResult<HistoricalPrice, CursorPagingMetadata> GetBy(ISpecification<HistoricalPrice> specification = null, CursorPagingRequest pagingRequest = null)
         {
             throw new System.NotImplementedException();
         }

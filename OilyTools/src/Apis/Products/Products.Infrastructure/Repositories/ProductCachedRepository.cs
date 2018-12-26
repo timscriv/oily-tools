@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using OilyTools.Core.Interfaces;
+using OilyTools.Core.Interfaces.Specifications;
+using Paginator;
 using Products.Core.Entities;
 using Products.Core.Interfaces.Repositories;
 using System;
@@ -22,12 +25,13 @@ namespace Products.Infrastructure.Repositories
                 .SetAbsoluteExpiration(TimeSpan.FromSeconds(5));
         }
 
-        public IEnumerable<Product> GetAll()
+        public IPagingResult<Product, CursorPagingMetadata> GetBy(ISpecification<Product> specification = null, CursorPagingRequest pagingRequest = null)
         {
+            //TODO: Make the specification cacheable
             return _cache.GetOrCreate(CacheKey, cacheEntry =>
             {
                 cacheEntry.SetOptions(_cacheOptions);
-                return _innerRepository.GetAll();
+                return _innerRepository.GetBy(specification);
             });
         }
 
