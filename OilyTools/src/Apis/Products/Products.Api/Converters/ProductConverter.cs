@@ -41,7 +41,5 @@ namespace Products.Core.Converters
         {
             return dtos?.Select(d => Convert(d));
         }
-
-       
     }
 }

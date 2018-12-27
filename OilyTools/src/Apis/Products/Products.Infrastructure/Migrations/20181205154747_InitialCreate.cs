@@ -16,10 +16,7 @@ namespace Products.Infrastructure.Migrations
                     Name = table.Column<string>(nullable: true),
                     CurrentPrice = table.Column<decimal>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
-                });
+                constraints: table => table.PrimaryKey("PK_Products", x => x.Id));
 
             migrationBuilder.CreateTable(
                 name: "HistoricalPrices",

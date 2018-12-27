@@ -1,15 +1,15 @@
-using OilyTools.Core.Interfaces;
 using OilyTools.Core.Interfaces.Specifications;
-using Paginator;
 using Products.Core.Entities;
 using Products.Core.Interfaces.Repositories;
 using Products.Infrastructure.Contexts;
+using System.Collections.Generic;
 
 namespace Products.Infrastructure.Repositories
 {
     public class HistoricalPriceRepository : IHistoricalPriceRepository
     {
         private readonly ProductsContext _context;
+
         public HistoricalPriceRepository(ProductsContext context)
         {
             _context = context;
@@ -25,7 +25,7 @@ namespace Products.Infrastructure.Repositories
             throw new System.NotImplementedException();
         }
 
-        public IPagingResult<HistoricalPrice, CursorPagingMetadata> GetBy(ISpecification<HistoricalPrice> specification = null, CursorPagingRequest pagingRequest = null)
+        public IEnumerable<HistoricalPrice> GetBy(ISpecification<HistoricalPrice> specification = null)
         {
             throw new System.NotImplementedException();
         }

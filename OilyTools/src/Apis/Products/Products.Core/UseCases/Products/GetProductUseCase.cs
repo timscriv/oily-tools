@@ -24,18 +24,14 @@ namespace Products.Core.UseCases.Products
             if (request.Id.HasValue ^ string.IsNullOrEmpty(request.Name))
                 throw new DomainException("Request must have either ID or name.");
 
-            Product product;
-
             if (request.Id.HasValue)
             {
-                product = GetById(request.Id.Value);
+                return GetById(request.Id.Value);
             }
             else
             {
-                product = GetByName(request.Name);
+                return GetByName(request.Name);
             }
-
-            return product;
         }
 
         private Product GetByName(string name)

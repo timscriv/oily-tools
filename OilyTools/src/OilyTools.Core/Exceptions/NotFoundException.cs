@@ -6,5 +6,9 @@
             : base($"The \"{name}\" ({key}) was not found.")
         {
         }
+
+        private NotFoundException(string businessMessage) : base(businessMessage)
+        {
+        }
     }
 }

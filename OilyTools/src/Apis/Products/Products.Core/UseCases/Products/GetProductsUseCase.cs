@@ -1,5 +1,4 @@
-﻿using Paginator;
-using Products.Core.Entities;
+﻿using Products.Core.Entities;
 using Products.Core.Interfaces.Repositories;
 using Products.Core.Interfaces.UseCases.Products;
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ namespace Products.Core.UseCases.Products
             _productRepository = productRepository;
         }
 
-        public IPagingResult<Product, CursorPagingMetadata> Execute()
+        public IEnumerable<Product> Execute()
         {
             return _productRepository.GetBy();
         }

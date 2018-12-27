@@ -13,7 +13,14 @@ namespace Clients.Infrastructure
             var query = inputQuery;
 
             if (specification.Expression != null)
+            {
                 query = query.Where(specification.Expression);
+            }
+
+            if (specification.IsPagingEnabled)
+            {
+                query = query.Skip(specification.Offset).Take(specification.Limit);
+            }
 
             return query;
         }

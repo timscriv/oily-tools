@@ -3,8 +3,7 @@ using Clients.Core.Interfaces.Repositories;
 using Clients.Core.Interfaces.UseCases;
 using Clients.Core.Specifications;
 using Clients.Core.ValueObjects;
-using OilyTools.Core.Interfaces.Specifications;
-using Paginator;
+using System.Collections.Generic;
 
 namespace Clients.Core.UseCases
 {
@@ -23,7 +22,7 @@ namespace Clients.Core.UseCases
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public IPagingResult<Client, CursorPagingMetadata> Execute(ClientsRequest request)
+        public IEnumerable<Client> Execute(ClientsRequest request)
         {
             //If this gets much larger we could pull out into a factory
             var spec = new ClientsFilterSpecification(request);

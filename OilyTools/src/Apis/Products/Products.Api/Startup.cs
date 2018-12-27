@@ -40,17 +40,12 @@ namespace Products.Api
             {
                 options.Filters.Add(typeof(CustomExceptionFilter));
                 options.Filters.Add(typeof(ValidateModelAttribute));
-            }).AddJsonOptions(options =>
-            {
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            }).AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore)
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<ProductsContext>(options => options.UseSqlite("Data Source=../../../../oilytools.db"));
 
-            services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.SuppressModelStateInvalidFilter = true;
-            });
+            services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
 
             services
                 .AddScoped<IGetProductsUseCase, GetProductsUseCase>()

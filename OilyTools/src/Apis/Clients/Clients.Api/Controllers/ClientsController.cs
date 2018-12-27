@@ -24,15 +24,11 @@ namespace Clients.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<ClientCollectionDto> Get([FromQuery] ClientsRequest request)
+        public ActionResult<List<ClientDto>> Get([FromQuery] ClientsRequest request)
         {
             var clients = _getClientsUseCase.Execute(request);
 
-            return new ClientCollectionDto
-            {
-                Clients = _converter.Convert(clients).ToList(),
-                Metadata = clients.Metadata
-            };
+            return _converter.Convert(clients).ToList();
         }
 
         //[HttpGet("{id}")]

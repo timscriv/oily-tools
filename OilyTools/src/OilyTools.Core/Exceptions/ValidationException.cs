@@ -10,6 +10,10 @@ namespace OilyTools.Core.Exceptions
             Failures = failures;
         }
 
+        private ValidationException(string businessMessage) : base(businessMessage)
+        {
+        }
+
         public IDictionary<string, IEnumerable<string>> Failures { get; }
     }
 }

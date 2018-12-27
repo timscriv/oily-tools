@@ -1,11 +1,11 @@
 ﻿using OilyTools.Core.Interfaces.Specifications;
-using Paginator;
+using System.Collections.Generic;
 
 namespace OilyTools.Core.Interfaces.Repositories
 {
-    public interface IBaseReadOnlyRepository<TKey, TEntity, TPagingRequest, TPagingMetadata>
+    public interface IBaseReadOnlyRepository<TKey, TEntity>
     {
         TEntity GetById(TKey id);
-        IPagingResult<TEntity, TPagingMetadata> GetBy(ISpecification<TEntity> spec = null, TPagingRequest pagingRequest = default(TPagingRequest));
+        IEnumerable<TEntity> GetBy(ISpecification<TEntity> spec = null);
     }
 }

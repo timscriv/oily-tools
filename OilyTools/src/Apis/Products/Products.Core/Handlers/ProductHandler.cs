@@ -5,7 +5,7 @@ using Products.Core.Interfaces.Repositories;
 
 namespace Products.Core.Handlers
 {
-    public class ProductHandler : 
+    public class ProductHandler :
         IHandle<ProductCreatedEvent>,
         IHandle<ProductPriceChangedEvent>
     {
@@ -22,12 +22,12 @@ namespace Products.Core.Handlers
         {
             _logger.LogInformation($"ProductPriceChangeEvent handled.");
 
-           //_context.HistoricalPrices.Add(new HistoricalPrice
-           //{
-           //    ProductId = domainEvent.ProductId,
-           //    Price = domainEvent.NewPrice,
-           //    StartDate = domainEvent.DateOccurred
-           //});
+            //_context.HistoricalPrices.Add(new HistoricalPrice
+            //{
+            //    ProductId = domainEvent.ProductId,
+            //    Price = domainEvent.NewPrice,
+            //    StartDate = domainEvent.DateOccurred
+            //});
         }
 
         public void Handle(ProductCreatedEvent domainEvent)

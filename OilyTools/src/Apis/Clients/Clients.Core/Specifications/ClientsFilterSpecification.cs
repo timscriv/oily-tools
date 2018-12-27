@@ -1,8 +1,6 @@
 ﻿using Clients.Core.Entities;
 using Clients.Core.ValueObjects;
 using OilyTools.Core.Specifications;
-using Paginator;
-using System.Linq.Expressions;
 
 namespace Clients.Core.Specifications
 {
@@ -12,6 +10,7 @@ namespace Clients.Core.Specifications
         public ClientsFilterSpecification(ClientsRequest request)
             : base()
         {
+            AddPaging(request.Limit, request.Offset);
         }
     }
 }

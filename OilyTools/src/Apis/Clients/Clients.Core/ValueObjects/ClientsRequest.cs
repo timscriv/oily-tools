@@ -8,14 +8,14 @@ namespace Clients.Core.ValueObjects
         public int? Year { get; set; }
         public string LastName { get; set; }
         public int Limit { get; set; } = 10;
-        public string Cursor { get; set; }
+        public int Offset { get; set; } = 0;
 
         protected override IEnumerable<object> GetAtomicValues()
         {
             yield return Year;
             yield return LastName;
             yield return Limit;
-            yield return Cursor;
+            yield return Offset;
         }
     }
 }

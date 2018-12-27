@@ -1,7 +1,7 @@
 ﻿namespace OilyTools.Core.Interfaces.Repositories
 {
-    public interface IBaseRepository<TKey, TEntity, TPagingRequest, TPagingMetadata> 
-        : IBaseReadOnlyRepository<TKey, TEntity, TPagingRequest, TPagingMetadata>
+    public interface IBaseRepository<TKey, TEntity>
+        : IBaseReadOnlyRepository<TKey, TEntity>
     {
         void Create(TEntity product);
         void Update(TEntity product);
