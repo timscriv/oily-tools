@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace Products.Core.Converters
 {
-    public class ProductConverter : IConverter<Product, ProductDto>
+    public class ProductConverter : BaseConverter<Product, ProductDto>
     {
-        public ProductDto Convert(Product entity)
+        public override ProductDto Convert(Product entity)
         {
             if (entity == null) return null;
 
@@ -20,7 +20,7 @@ namespace Products.Core.Converters
             };
         }
 
-        public Product Convert(ProductDto dto)
+        public override Product Convert(ProductDto dto)
         {
             if (dto == null) return null;
 
@@ -30,16 +30,6 @@ namespace Products.Core.Converters
                 Name = dto.Name,
                 CurrentPrice = dto.Price
             };
-        }
-
-        public IEnumerable<ProductDto> Convert(IEnumerable<Product> entities)
-        {
-            return entities?.Select(e => Convert(e));
-        }
-
-        public IEnumerable<Product> Convert(IEnumerable<ProductDto> dtos)
-        {
-            return dtos?.Select(d => Convert(d));
         }
     }
 }
