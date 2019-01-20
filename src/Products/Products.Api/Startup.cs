@@ -1,25 +1,14 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using OilyTools.Core.Converters;
-using OilyTools.Core.DomainEvents.Dispatchers;
-using OilyTools.Core.Interfaces;
-using OilyTools.Core.Interfaces.DomainEvents.Dispatchers;
-using Products.Api.Dtos;
-using Products.Api.Filters;
-using Products.Core.Converters;
-using Products.Core.DomainEvents;
-using Products.Core.Entities;
-using Products.Core.Handlers;
-using Products.Core.Interfaces.Repositories;
-using Products.Core.Interfaces.UseCases.Products;
-using Products.Core.UseCases.Products;
-using Products.Infrastructure.Contexts;
-using Products.Infrastructure.Repositories;
+using Products.Api.Common.Filters;
+using Products.Api.Products.Dtos;
+using Products.Core.Common.Entities;
+using Products.Core.Products.Converters;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Products.Api
@@ -43,23 +32,22 @@ namespace Products.Api
             }).AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore)
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddDbContext<ProductsContext>(options => options.UseSqlite("Data Source=../../../../oilytools.db"));
-
             services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
 
+            //Core
             services
-                .AddScoped<IGetProductsUseCase, GetProductsUseCase>()
-                .AddScoped<IGetProductUseCase, GetProductUseCaseCached>()
-                .AddScoped<GetProductUseCase>()
-                .AddScoped<ICreateProductUseCase, CreateProductUseCase>()
-                .AddScoped<IProductReadOnlyRepository, ProductCachedRepository>()
-                .AddScoped<ProductRepository>()
-                .AddScoped<IProductRepository, ProductRepository>()
-                .AddScoped<IHistoricalPriceRepository, HistoricalPriceRepository>()
-                .AddScoped<IDomainEventDispatcher, DomainEventDispatcher>()
-                .AddScoped<IConverter<Product, ProductDto>, ProductConverter>()
-                .AddScoped(typeof(IHandle<ProductCreatedEvent>), typeof(ProductHandler))
-                .AddScoped(typeof(IHandle<ProductPriceChangedEvent>), typeof(ProductHandler))
+                .AddDomainEventDispatcher()
+                .AddProductUseCases()
+                .AddDomainEventHandlers();
+
+            //Infrastructure
+            services
+                .AddEntityFrameworkSqliteSuite("Data Source=../../../oilytools.db");
+
+            services
+                .AddScoped<IConverter<Product, ProductDto>, ProductConverter>();
+
+            services
                 .AddSwaggerGen(c => c.SwaggerDoc("v1", new Info { Title = "Products API", Version = "v1" }));
         }
 

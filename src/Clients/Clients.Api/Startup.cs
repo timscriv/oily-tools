@@ -1,18 +1,15 @@
-﻿using Clients.Core.Interfaces.Repositories;
-using Clients.Core.Interfaces.UseCases;
-using Clients.Core.UseCases;
-using Clients.Infrastructure.Repositories;
+﻿using AutoMapper;
+using Clients.Api.Clients.Converters;
+using Clients.Api.Clients.Dtos;
+using Clients.Core.Common.Entities;
+using Clients.Core.Common.ValueObjects;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Swashbuckle.AspNetCore.Swagger;
-using AutoMapper;
-using Clients.Api.Converters;
 using OilyTools.Core.Converters;
-using Clients.Api.Dtos;
-using Clients.Core.Entities;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Clients.Api
 {
@@ -30,17 +27,18 @@ namespace Clients.Api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            //UseCases
+            //Core
             services
-                .AddScoped<IGetClientsUseCase, GetClientsUseCase>();
+                .AddDomainEventDispatcher()
+                .AddClientUseCases();
 
-            //repositories
+            //Infrastructure
             services
-                .AddScoped<IClientRepository, BogusClientRepository>();
+                .AddBogusClientSuite();
 
-            //converters
             services
-                .AddScoped<IConverter<Client, ClientDto>, ClientConverter>();
+                .AddScoped<IConverter<Client, ClientDto>, ClientConverter>()
+                .AddScoped<IConverter<ClientsRequest, ClientsRequestDto>, ClientsRequestConverter>();
 
             services
                 .AddAutoMapper()
